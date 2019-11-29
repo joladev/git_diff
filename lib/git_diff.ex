@@ -272,9 +272,11 @@ defmodule GitDiff do
 
   defp from_file("a/" <> file), do: file
   defp from_file("/dev/null"), do: nil
+  defp from_file("\"a/" <> file), do: String.slice(file, 0..-2)
 
   defp to_file("b/" <> file), do: file
   defp to_file("/dev/null"), do: nil
+  defp to_file("\"b/" <> file), do: String.slice(file, 0..-2)
 
   defp split_diff(diff) do
     chunk_fun = fn line, lines ->
